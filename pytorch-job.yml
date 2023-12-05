@@ -1,0 +1,31 @@
+apiVersion: "kubeflow.org/v1"
+kind: PyTorchJob
+metadata:
+  name: pytorch-example
+  namespace: kubeflow
+spec:
+  pytorchReplicaSpecs:
+    Master:
+      replicas: 1
+      restartPolicy: OnFailure
+      template:
+        spec:
+          containers:
+            - name: pytorch
+              image: jarakcyc/experiments:kubeflow-01
+              imagePullPolicy: Always
+              resources:
+                requests:
+                  cpu: "1"
+    Worker:
+      replicas: 1
+      restartPolicy: OnFailure
+      template:
+        spec:
+          containers:
+            - name: pytorch
+              image: jarakcyc/experiments:kubeflow-01
+              imagePullPolicy: Always
+              resources:
+                requests:
+                  cpu: "1"
